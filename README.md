@@ -93,6 +93,14 @@ oc apply -k buildconfigs
 oc apply -k https://github.com/rh-ai-quickstart/custom-workbench-images-examples/imagestreams/
 ```
 
+Because some of these images are going to be built on the cluster, you can use this command to follow their progress:
+
+```bash
+oc get builds \
+  -n redhat-ods-applications \
+  --watch
+```
+
 #### Install Individual Images
 
 To install a specific image, use the appropriate command below:
@@ -136,7 +144,7 @@ We welcome contributions to expand this collection of custom workbench images. I
 
 ### Support
 
-These images are provided by the community and are not officially supported by Red Hat. They are provided as-is, and while we strive for quality, there is no guarantee of support. If you encounter issues, please check the respective GitHub repositories or open an issue in this repository. 
+These images are provided by the community and are not officially supported by Red Hat. They are provided as-is, and while we strive for quality, there is no guarantee of support. If you encounter issues, please check the respective GitHub repositories or open an issue in this repository.
 
 
 ### Categories
