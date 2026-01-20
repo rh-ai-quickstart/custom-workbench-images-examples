@@ -1,7 +1,6 @@
 # Custom Workbench Images for Red Hat OpenShift AI
 
-This repository was created by the CAI team.
-This repository provides a fast way to add a collection of community-contributed Custom Workbench Images for Red Hat OpenShift AI (RHOAI), helping you get to work faster with specialized tools and libraries.
+This repository was created by the CAI team and provides a fast way to add a collection of community-contributed Custom Workbench Images for Red Hat OpenShift AI (RHOAI), helping you get to work faster with specialized tools and libraries.
 
 These images extend the functionality of your RHOAI environment with additional tools and capabilities that can be immediately accessed by all users.
 
@@ -38,6 +37,25 @@ The following custom workbench images are available in this collection. For the 
   - Streamlined data access
 - **GitHub Repository**: [odh-tec](https://github.com/opendatahub-io-contrib/odh-tec)
 
+### [Gaudi-PyTorch](./imagestreams/Gaudi-PyTorch-Workbench-Image.yaml)
+
+- **Description**: A minimal workbench with Habana drivers and Gaudi PyTorch modules
+- **Key Features**:
+  - Installed PyTorch with tools dedicated to Gaudi
+  - Jupyter Notebook as user interface
+  - Built on top of jupyter-minimal-ubi9-python-3.12 workbench from OpenDataHub
+  - Communication with Gaudi through [Intel Gaudi Operator](https://catalog.redhat.com/en/software/container-stacks/detail/6683b2cce45daa25e36bddcb) (**prior installation required**)
+- **GitHub Repository**: [HabanaAI/Setup_and_Install](https://github.com/HabanaAI/Setup_and_Install)
+
+### [Gaudi-DataScience](./imagestreams/Gaudi-DataScience-Workbench-Image.yaml)
+
+- **Description**: An enhanced workbench for Gaudi with integrated data science tools
+- **Key Features**:
+  - Similar to Gaudi-PyTorch, but with data science tools
+  - Built on top of jupyter-datascience-ubi9-python workbench from OpenDataHub
+  - Requires Intel Gaudi Operator installed
+- **GitHub Repository**: [HabanaAI/Setup_and_Install](https://github.com/HabanaAI/Setup_and_Install)
+
 ## Getting Started
 
 Follow these steps to install and use the custom workbench images in your Red Hat OpenShift AI environment. For detailed installation instructions, see the documentation in the [`imagestreams`](./imagestreams) directory.
@@ -52,13 +70,25 @@ Before you begin, ensure you have the following:
 
 ### Installation
 
-You can install all images at once or individually from the [`imagestreams`](./imagestreams) directory based on your needs.
+Workbenches sourced from public registries can be installed directly from the [`imagestreams`](./imagestreams) directory, while others require building images in OpenShift using BuildConfigs from the [`buildconfigs`](./buildconfigs) directory.
+
+**Workbenches by image source:**
+
+- **Public registry (direct install):**
+  - AnythingLLM
+  - ODH-TEC
+
+- **Requires build on OpenShift:**
+  - Gaudi-PyTorch
+  - Gaudi-DataScience
 
 #### Install All Images
 
-To install all available custom workbench images, run the following command:
+To install all available custom workbench images, run the following commands:
 
 ```bash
+# Build and install workbenches on OpenShift
+oc apply -k buildconfigs
 # Apply all custom workbench images
 oc apply -k https://github.com/rh-ai-quickstart/custom-workbench-images-examples/imagestreams/
 ```
@@ -76,6 +106,12 @@ oc apply -f ${URL}/AnythingLLM-Custom-Workbench-Image.yaml
 
 # Install ODH-TEC
 oc apply -f ${URL}/ODH-TEC-Custom-Workbench-Image.yaml
+
+# Build and install Gaudi-PyTorch
+oc apply -k buildconfigs/gaudi-pytorch
+
+# Build and install Gaudi-DataScience
+oc apply -k buildconfigs/gaudi-datascience
 ```
 
 ## Usage
@@ -87,6 +123,8 @@ After installation, the new images will be available in the RHOAI dashboard. Use
 To remove all custom workbench images added by this repository, run the following command:
 
 ```bash
+# Remove workbenches built on OpenShift
+oc delete -k buildconfigs
 oc delete -k https://github.com/rh-ai-quickstart/custom-workbench-images-examples/imagestreams/
 ```
 
