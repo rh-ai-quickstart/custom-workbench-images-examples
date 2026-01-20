@@ -17,6 +17,25 @@ spec:
   lookupPolicy:
     local: true
   tags:
+    - name: 1.9.1-rc0
+      annotations:
+        opendatahub.io/notebook-python-dependencies: |
+          [
+            {"name": "AnythingLLM","version": "v1.9.1-rc0"}
+          ]
+        opendatahub.io/notebook-software: |
+          [
+            {"name": "AnythingLLM", "version": "v1.9.1-rc0"}
+          ]
+        openshift.io/imported-from: 'quay.io/rh-aiservices-bu/anythingllm-workbench:1.9.1-rc0'
+        opendatahub.io/workbench-image-recommended: 'true'
+      from:
+        kind: DockerImage
+        name: 'quay.io/rh-aiservices-bu/anythingllm-workbench:1.9.1-rc0'
+      importPolicy:
+        importMode: Legacy
+      referencePolicy:
+        type: Source
     - name: 1.7.5
       annotations:
         opendatahub.io/notebook-python-dependencies: |
@@ -28,7 +47,7 @@ spec:
             {"name": "AnythingLLM", "version": "v1.7.5"}
           ]
         openshift.io/imported-from: 'quay.io/rh-aiservices-bu/anythingllm-workbench:1.7.5'
-        opendatahub.io/workbench-image-recommended: 'true'
+        opendatahub.io/workbench-image-recommended: 'false'
       from:
         kind: DockerImage
         name: 'quay.io/rh-aiservices-bu/anythingllm-workbench:1.7.5'
