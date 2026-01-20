@@ -86,11 +86,27 @@ Workbenches sourced from public registries can be installed directly from the [`
 
 To install all available custom workbench images, run the following commands:
 
+* directly from github without cloning the repo:
+  ```bash
+  URL=https://github.com/rh-ai-quickstart/custom-workbench-images-examples/
+  oc apply -k ${URL}/buildconfigs/
+  oc apply -k ${URL}/imagestreams/
+  ````
+* from a locally-cloned git repo:
+
+  ```bash
+  # Build and install workbenches on OpenShift
+  oc apply -k buildconfigs
+  # Apply all custom workbench images
+  oc apply -k imagestreams
+  ```
+
+Because some of these images are going to be built on the cluster, you can use this command to follow their progress:
+
 ```bash
-# Build and install workbenches on OpenShift
-oc apply -k buildconfigs
-# Apply all custom workbench images
-oc apply -k https://github.com/rh-ai-quickstart/custom-workbench-images-examples/imagestreams/
+oc get builds \
+  -n redhat-ods-applications \
+  --watch
 ```
 
 Because some of these images are going to be built on the cluster, you can use this command to follow their progress:
@@ -130,11 +146,22 @@ After installation, the new images will be available in the RHOAI dashboard. Use
 
 To remove all custom workbench images added by this repository, run the following command:
 
-```bash
-# Remove workbenches built on OpenShift
-oc delete -k buildconfigs
-oc delete -k https://github.com/rh-ai-quickstart/custom-workbench-images-examples/imagestreams/
-```
+* directly from github without cloning the repo:
+  ```bash
+  URL=https://github.com/rh-ai-quickstart/custom-workbench-images-examples/
+  oc delete -k ${URL}/buildconfigs/
+  oc delete -k ${URL}/imagestreams/
+  ````
+* from a locally-cloned git repo:
+
+  ```bash
+  # Build and install workbenches on OpenShift
+  oc delete -k buildconfigs
+  # Apply all custom workbench images
+  oc delete -k imagestreams
+  ```
+
+
 
 ## Community
 
