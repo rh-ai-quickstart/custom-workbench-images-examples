@@ -109,6 +109,14 @@ oc get builds \
   --watch
 ```
 
+Because some of these images are going to be built on the cluster, you can use this command to follow their progress:
+
+```bash
+oc get builds \
+  -n redhat-ods-applications \
+  --watch
+```
+
 #### Install Individual Images
 
 To install a specific image, use the appropriate command below:

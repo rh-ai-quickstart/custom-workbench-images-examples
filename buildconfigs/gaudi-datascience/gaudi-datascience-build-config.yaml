@@ -48,6 +48,10 @@ spec:
 
       COPY install_packages.sh .
 
+      # Pre-install numpy before install_packages.sh since the script uses
+      # --extra-index-url for PyTorch wheels which don't include numpy
+      RUN pip install numpy
+
       RUN ./install_packages.sh && rm -f install_packages.sh && \
           /sbin/ldconfig
 
